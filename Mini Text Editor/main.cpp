@@ -25,7 +25,6 @@ void displayProgram() {
 void Processing(int processNumber) {
 	TextEditor editor;
 	string text;
-	editor.show();
 	if (processNumber == 1)
 	{
 		cin.ignore();
@@ -34,6 +33,8 @@ void Processing(int processNumber) {
 		editor.addLine(text);
 	}
 	else if (processNumber == 2)
+	{
+	}else if (processNumber == 2)
 	{
 	
 	}
@@ -67,10 +68,10 @@ void Processing(int processNumber) {
 	}
 	else if (processNumber == 10)
 	{
-		
+		editor.show();
 	}
 	else {
-		cout << "\nPleacse Enter valid process Number";
+		cout << "\n Pleacse Enter valid process Number";
 	}
 
 }

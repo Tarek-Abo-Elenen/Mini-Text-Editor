@@ -2,7 +2,7 @@
 #include<iostream>
 #include<map>
 using namespace std;
-class TextEditor
+class  TextEditor
 {
 public:
 	
@@ -18,7 +18,7 @@ public:
     void undo();
 
 private:
-    map<int, string> lines;
-    int count = 0;
+    static map<int, string> lines;
+    static int count;
 };
 
