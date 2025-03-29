@@ -2,8 +2,13 @@
 
 int TextEditor::count = 0;
 map<int, string> TextEditor::lines;
+stack<map<int, string>> TextEditor::history;
 
+void TextEditor::saveState() {
+	history.push(lines);
+}
 void TextEditor::addLine() {
+	saveState();
 	string text;
 	cin.ignore();
 	cout << "Enter your text:";
@@ -15,6 +20,7 @@ void TextEditor::addLine() {
 	lines.emplace(++count, text);
 }
 void TextEditor::insertLine() {
+	saveState();
 	map<int, string>newmap;
 	int lineNumber;
 	string text;
@@ -44,6 +50,7 @@ void TextEditor::insertLine() {
 	newmap.clear();
 }
 string TextEditor::getLine() {
+	saveState();
 	int lineNumber;
 	cout << "Enter The Number of Line:";
 	cin >> lineNumber;
@@ -52,6 +59,7 @@ string TextEditor::getLine() {
 	return '\n'+lines[lineNumber] + '\n';
 }
 void TextEditor::deleteLine() {
+	saveState();
 	int lineNumber;
 	cout << "Enter The Number of Line:";
 	cin >> lineNumber;
@@ -70,6 +78,7 @@ void TextEditor::deleteLine() {
 	newmap.clear();
 }
 void TextEditor::updateLine() {
+	saveState();
 	int lineNumber;
 	string text;
 	cout << "Enter The Number of Line:";
@@ -85,6 +94,7 @@ void TextEditor::updateLine() {
 	lines[lineNumber] = text;
 }
 void TextEditor::findAll() {
+	saveState();
 	map<int, string>result;
 	string search;
 	cout << "Enter your text:";
@@ -109,6 +119,7 @@ void TextEditor::findAll() {
 	result.clear();
 }
 void TextEditor::findAndReplaceAll() {
+	saveState();
 	string oldString,newString;
 	int index;
 	bool flag = false;
@@ -142,6 +153,7 @@ void TextEditor::show() {
 	cout << endl;
 }
 void TextEditor::deleteRange() {
+	saveState();
 	int startNumber, endNumber;
 	cout << "Enter start number:";
 	cin >> startNumber;
@@ -169,7 +181,14 @@ void TextEditor::deleteRange() {
 	result.clear();
 }
 void TextEditor::undo() {
-
+	if (!history.empty()) {
+		lines = history.top();
+		history.pop();
+		count = lines.size();
+	}
+	else {
+		cout << "No previous state to undo.\n";
+	}
 }
 string TextEditor::LowerCase(string & text) {
 	string newtext = "";

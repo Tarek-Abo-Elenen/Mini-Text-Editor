@@ -6,8 +6,9 @@ class  TextEditor
 private:
     static map<int, string> lines;
     static int count;
+    static stack<map<int, string>>history;
     string LowerCase(string& text);
-
+    void saveState();
 public:	
     void addLine();
     void insertLine();
