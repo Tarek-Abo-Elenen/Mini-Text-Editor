@@ -3,21 +3,22 @@
 using namespace std;
 class  TextEditor
 {
-public:
-	
+private:
+    static map<int, string> lines;
+    static int count;
+    string LowerCase(string& text);
+
+public:	
     void addLine();
     void insertLine();
     string getLine();
     void deleteLine();
     void deleteRange(int startNumber, int endNumber);
     void updateLine();
-    map<int, string> findAll(string& search);
+    void findAll();
     void findAndReplaceAll(string& oldString, string& newString);
     void show();
     void undo();
 
-private:
-    static map<int, string> lines;
-    static int count;
 };
 

@@ -80,8 +80,29 @@ void TextEditor::updateLine() {
 	getline(cin, text);
 	lines[lineNumber] = text;
 }
-map<int, string> TextEditor::findAll(string& search) {
-	return lines;
+void TextEditor::findAll() {
+	map<int, string>result;
+	string search;
+	cout << "Enter your text:";
+	cin.ignore();
+	getline(cin, search);
+	int counter = 0;
+	for (auto it : lines)
+	{
+		
+		if (LowerCase(it.second).find(LowerCase(search)) != -1) {
+			result[++counter] = it.second;
+		}
+	}
+	if (result.empty())
+	{
+		cout << "\nthere isn't this word\n";
+		return;
+	}
+	for (auto it : result) {
+		cout << it.first << "-" << it.second << '\n';
+	}
+
 }
 void TextEditor::findAndReplaceAll(string& oldString, string& newString) {
 
@@ -102,4 +123,10 @@ void TextEditor::deleteRange(int startNumber,int endNumber) {
 }
 void TextEditor::undo() {
 
+}
+string TextEditor::LowerCase(string & text) {
+	string newtext = "";
+	for (auto it : text)
+		newtext += tolower(it);
+	return newtext;
 }

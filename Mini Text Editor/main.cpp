@@ -13,7 +13,7 @@ void displayProgram() {
 	cout << "\t\t\t\t\t\t     3-Update line\n";
 	cout << "\t\t\t\t\t\t     4-Delete line\n";
 	cout << "\t\t\t\t\t\t     5-Delete Range\n";
-	cout << "\t\t\t\t\t\t     6-Find line\n";
+	cout << "\t\t\t\t\t\t     6-Find All\n";
 	cout << "\t\t\t\t\t\t     7-Find and Replace All lines\n";
 	cout << "\t\t\t\t\t\t     8-Get Line\n";
 	cout << "\t\t\t\t\t\t     9-Undo\n";
@@ -38,9 +38,7 @@ void Processing(int processNumber) {
 
 	}
 	else if (processNumber == 6)
-	{
-
-	}
+		editor.findAll();
 	else if (processNumber == 7)
 	{
 
