@@ -1,5 +1,6 @@
 #pragma once
 #include<bits/stdc++.h>
+#include<regex>
 using namespace std;
 class  TextEditor
 {
@@ -9,10 +10,14 @@ private:
     static stack<map<int, string>>history;
     string LowerCase(string& text);
     void saveState();
+    string readAndValidString(string message);
+
 public:	
     void addLine();
     void insertLine();
     string getLine();
+    int numberExists(string message);
+    int writeValidNumber(string message);
     void deleteLine();
     void deleteRange();
     void updateLine();
@@ -20,6 +25,5 @@ public:
     void findAndReplaceAll();
     void show();
     void undo();
-
 };
 

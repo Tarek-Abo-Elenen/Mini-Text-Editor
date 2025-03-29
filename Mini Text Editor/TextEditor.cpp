@@ -4,19 +4,10 @@ int TextEditor::count = 0;
 map<int, string> TextEditor::lines;
 stack<map<int, string>> TextEditor::history;
 
-void TextEditor::saveState() {
-	history.push(lines);
-}
 void TextEditor::addLine() {
 	saveState();
-	string text;
 	cin.ignore();
-	cout << "Enter your text:";
-	getline(cin, text);
-	if (text.empty())
-	{
-		cout << "\nPlease Enter the text:\n";
-	}
+	string text = readAndValidString("Enter your text:");
 	lines.emplace(++count, text);
 }
 void TextEditor::insertLine() {
@@ -24,16 +15,9 @@ void TextEditor::insertLine() {
 	map<int, string>newmap;
 	int lineNumber;
 	string text;
-	cout << "Enter The Number of Line:";
-	cin >> lineNumber;
-	if (lineNumber > lines.size())
-	{
-		cout << "\nThere isn't this Line Number\n";
-		return;
-	}
-	cout << "Enter your text:";
+	lineNumber = numberExists("Enter The Number of Line:");
 	cin.ignore();
-	getline(cin, text);
+	text = readAndValidString("Enter your text:");
 	auto it = lines.begin();
 	for (int  i = 1; i <=count+1; i++)
 	{
@@ -52,22 +36,13 @@ void TextEditor::insertLine() {
 string TextEditor::getLine() {
 	saveState();
 	int lineNumber;
-	cout << "Enter The Number of Line:";
-	cin >> lineNumber;
-	if (lineNumber > lines.size())
-		return "\nThere isn't this Line Number\n";
+	lineNumber = numberExists("Enter The Number of Line:");
 	return '\n'+lines[lineNumber] + '\n';
 }
 void TextEditor::deleteLine() {
 	saveState();
 	int lineNumber;
-	cout << "Enter The Number of Line:";
-	cin >> lineNumber;
-	if (lineNumber > lines.size())
-	{
-		cout << "\nThere isn't this Line Number\n";
-		return;
-	}
+	lineNumber = numberExists("Enter The Number of Line:");
 	count--;
 	lines.erase(lineNumber);
 	map<int, string>newmap;
@@ -81,25 +56,17 @@ void TextEditor::updateLine() {
 	saveState();
 	int lineNumber;
 	string text;
-	cout << "Enter The Number of Line:";
-	cin >> lineNumber;
-	if (lineNumber > lines.size())
-	{
-		cout << "\nThere isn't this Line Number\n";
-		return;
-	}
-	cout << "Enter The new text:";
+	lineNumber = numberExists("Enter The Number of Line:");
 	cin.ignore();
-	getline(cin, text);
+	text = readAndValidString("Enter the New text:");
 	lines[lineNumber] = text;
 }
 void TextEditor::findAll() {
 	saveState();
 	map<int, string>result;
 	string search;
-	cout << "Enter your text:";
 	cin.ignore();
-	getline(cin, search);
+	search = readAndValidString("Enter your text");
 	int counter = 0;
 	for (auto it : lines)
 	{
@@ -123,11 +90,9 @@ void TextEditor::findAndReplaceAll() {
 	string oldString,newString;
 	int index;
 	bool flag = false;
-	cout << "Enter old text:";
 	cin.ignore();
-	getline(cin, oldString);
-	cout << "Enter new text:";
-	getline(cin, newString);
+	oldString = readAndValidString("Enter the old text:");
+	newString = readAndValidString("Enter the new text:");
 	auto item = lines.begin();
 	for (auto it : lines)
 	{
@@ -155,20 +120,8 @@ void TextEditor::show() {
 void TextEditor::deleteRange() {
 	saveState();
 	int startNumber, endNumber;
-	cout << "Enter start number:";
-	cin >> startNumber;
-	if (startNumber > lines.size())
-	{
-		cout << "\nThere isn't this Line Number\n";
-		return;
-	}
-	cout << "Enter end number:";
-	cin >> endNumber;
-	if (endNumber > lines.size())
-	{
-		cout << "\nThere isn't this Line Number\n";
-		return;
-	}
+	startNumber = numberExists("Enter start number:");
+	endNumber = numberExists("Enter end number:");
 	map<int, string>result;
 	int counter = 0;
 	for (int i = 1; i <= count; i++)
@@ -186,13 +139,47 @@ void TextEditor::undo() {
 		history.pop();
 		count = lines.size();
 	}
-	else {
-		cout << "No previous state to undo.\n";
-	}
+	else 
+		cout << "\nNo previous state to undo.\n";
 }
 string TextEditor::LowerCase(string & text) {
 	string newtext = "";
 	for (auto it : text)
 		newtext += tolower(it);
 	return newtext;
+}
+string TextEditor::readAndValidString(string message) {
+	string text;
+	cout << message;
+	getline(cin, text);
+	while (text == "") {
+		cout << "\nWarning! The text cann't be empty\n";
+		cout << message;
+		getline(cin, text);
+	}
+	return text;
+}
+void TextEditor::saveState() {
+	history.push(lines);
+}
+int TextEditor::writeValidNumber(string message) {
+	regex numberPattern("^[0-9]+$");
+	string input;
+	cout << message;
+	cin >> input;
+	while (!regex_match(input, numberPattern)) {
+		cout << "Warning! Pleace Enter only Numbers\n";
+		cout << message;
+		cin >> input;
+	}
+	return stoi(input);
+}
+int TextEditor::numberExists(string message) {
+	int lineNumber = writeValidNumber(message);
+	while (lineNumber > lines.size())
+	{
+		cout << "\nThere isn't this Line Number\n";
+		lineNumber = writeValidNumber(message);
+	}
+	return lineNumber;
 }

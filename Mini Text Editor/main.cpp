@@ -47,24 +47,10 @@ void Processing(int processNumber) {
 		editor.show();
 	else 
 		cout << "\n Pleacse Enter valid process Number";
-
-}
-bool isValidNumber(const string& input) {
-	regex numberPattern("^[0-9]+$");
-	return regex_match(input, numberPattern);
 }
 int main() {
-	string processNumber;
 	displayProgram();
+	TextEditor e;
 	while (true)
-	{
-		cout << "\nEnter the Number of Process: ";
-		cin >> processNumber;
-		if (!isValidNumber(processNumber))
-		{
-			cout << "Pleace Enter only Numbers:";
-			continue;
-		}
-		Processing(stoi(processNumber));
-	}
+		Processing(e.writeValidNumber("\nEnter the Number of Process: "));
 }
