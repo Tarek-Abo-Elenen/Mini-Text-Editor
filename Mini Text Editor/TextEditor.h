@@ -13,10 +13,10 @@ public:
     void insertLine();
     string getLine();
     void deleteLine();
-    void deleteRange(int startNumber, int endNumber);
+    void deleteRange();
     void updateLine();
     void findAll();
-    void findAndReplaceAll(string& oldString, string& newString);
+    void findAndReplaceAll();
     void show();
     void undo();
 

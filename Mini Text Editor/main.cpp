@@ -34,21 +34,15 @@ void Processing(int processNumber) {
 	else if (processNumber == 4)
 		editor.deleteLine();
 	else if (processNumber == 5)
-	{
-
-	}
+		editor.deleteRange();
 	else if (processNumber == 6)
 		editor.findAll();
 	else if (processNumber == 7)
-	{
-
-	}
+		editor.findAndReplaceAll();
 	else if (processNumber == 8)
 		cout << editor.getLine();
 	else if (processNumber == 9)
-	{
-		
-	}
+		editor.undo();
 	else if (processNumber == 10)
 		editor.show();
 	else 

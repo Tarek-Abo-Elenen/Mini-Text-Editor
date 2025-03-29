@@ -102,10 +102,29 @@ void TextEditor::findAll() {
 	for (auto it : result) {
 		cout << it.first << "-" << it.second << '\n';
 	}
-
+	result.clear();
 }
-void TextEditor::findAndReplaceAll(string& oldString, string& newString) {
-
+void TextEditor::findAndReplaceAll() {
+	string oldString,newString;
+	int index;
+	bool flag = false;
+	cout << "Enter old text:";
+	cin.ignore();
+	getline(cin, oldString);
+	cout << "Enter new text:";
+	getline(cin, newString);
+	auto item = lines.begin();
+	for (auto it : lines)
+	{
+		if (LowerCase(it.second).find(LowerCase(oldString)) != -1) {
+			flag = true;
+			index = LowerCase(it.second).find(LowerCase(oldString));
+			item->second.replace(index, it.second.length(), newString);
+		}
+		item++;
+	}
+	if (!flag)
+		cout << "\nthere isn't this word\n";
 }
 void TextEditor::show() {
 	cout << endl;
@@ -118,8 +137,8 @@ void TextEditor::show() {
 		cout << i << '-' << lines[i] << endl;
 	cout << endl;
 }
-void TextEditor::deleteRange(int startNumber,int endNumber) {
-
+void TextEditor::deleteRange() {
+	int startNumber, endNumber;
 }
 void TextEditor::undo() {
 
