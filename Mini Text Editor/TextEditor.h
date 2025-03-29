@@ -1,12 +1,11 @@
 #pragma once
-#include<iostream>
-#include<map>
+#include<bits/stdc++.h>
 using namespace std;
 class  TextEditor
 {
 public:
 	
-    void addLine(string& text);
+    void addLine();
     void insertLine(int lineNumber, string& text);
     string getLine(int lineNumber);
     void deleteLine(int lineNumber);

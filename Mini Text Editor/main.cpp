@@ -24,17 +24,9 @@ void displayProgram() {
 }
 void Processing(int processNumber) {
 	TextEditor editor;
-	string text;
 	if (processNumber == 1)
-	{
-		cin.ignore();
-		cout << "Enter your text:";
-		getline(cin, text);
-		editor.addLine(text);
-	}
+		editor.addLine();
 	else if (processNumber == 2)
-	{
-	}else if (processNumber == 2)
 	{
 	
 	}
@@ -60,19 +52,16 @@ void Processing(int processNumber) {
 	}
 	else if (processNumber == 8)
 	{
-		
+	
 	}
 	else if (processNumber == 9)
 	{
 		
 	}
 	else if (processNumber == 10)
-	{
 		editor.show();
-	}
-	else {
+	else 
 		cout << "\n Pleacse Enter valid process Number";
-	}
 
 }
 int main() {

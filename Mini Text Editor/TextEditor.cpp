@@ -3,14 +3,18 @@
 int TextEditor::count = 0;
 map<int, string> TextEditor::lines;
 
-void TextEditor::addLine(string& text) {
+void TextEditor::addLine() {
+	string text;
+	cin.ignore();
+	cout << "Enter your text:";
+	getline(cin, text);
 	lines.emplace(++count, text);
 }
 void TextEditor::insertLine(int lineNumber, string& text) {
 
 }
 string TextEditor::getLine(int lineNumber) {
-	return "";
+	return lines[lineNumber];
 }
 void TextEditor::deleteLine(int lineNumber) {
 
