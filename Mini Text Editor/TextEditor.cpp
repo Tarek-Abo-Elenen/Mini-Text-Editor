@@ -8,6 +8,10 @@ void TextEditor::addLine() {
 	cin.ignore();
 	cout << "Enter your text:";
 	getline(cin, text);
+	if (text.empty())
+	{
+		cout << "\nPlease Enter the text:\n";
+	}
 	lines.emplace(++count, text);
 }
 void TextEditor::insertLine() {
@@ -139,6 +143,30 @@ void TextEditor::show() {
 }
 void TextEditor::deleteRange() {
 	int startNumber, endNumber;
+	cout << "Enter start number:";
+	cin >> startNumber;
+	if (startNumber > lines.size())
+	{
+		cout << "\nThere isn't this Line Number\n";
+		return;
+	}
+	cout << "Enter end number:";
+	cin >> endNumber;
+	if (endNumber > lines.size())
+	{
+		cout << "\nThere isn't this Line Number\n";
+		return;
+	}
+	map<int, string>result;
+	int counter = 0;
+	for (int i = 1; i <= count; i++)
+	{
+		if (i < startNumber || i > endNumber)
+			result[++counter] = lines[i];
+	}
+	lines = result;
+	count -= (endNumber - startNumber + 1);
+	result.clear();
 }
 void TextEditor::undo() {
 
