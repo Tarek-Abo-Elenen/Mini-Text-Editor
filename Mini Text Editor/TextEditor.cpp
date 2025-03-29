@@ -39,8 +39,20 @@ void TextEditor::deleteLine() {
 	lines = newmap;
 	newmap.clear();
 }
-void TextEditor::updateLine(int lineNumber, string& text) {
-
+void TextEditor::updateLine() {
+	int lineNumber;
+	string text;
+	cout << "Enter The Number of Line:";
+	cin >> lineNumber;
+	if (lineNumber > lines.size())
+	{
+		cout << "\nThere isn't this Line Number\n";
+		return;
+	}
+	cout << "Enter The new text:";
+	cin.ignore();
+	getline(cin, text);
+	lines[lineNumber] = text;
 }
 map<int, string> TextEditor::findAll(string& search) {
 	return lines;

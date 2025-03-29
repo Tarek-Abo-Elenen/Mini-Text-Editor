@@ -10,7 +10,7 @@ public:
     string getLine();
     void deleteLine();
     void deleteRange(int startNumber, int endNumber);
-    void updateLine(int lineNumber, string& text);
+    void updateLine();
     map<int, string> findAll(string& search);
     void findAndReplaceAll(string& oldString, string& newString);
     void show();

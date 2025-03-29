@@ -32,9 +32,7 @@ void Processing(int processNumber) {
 
 	}
 	else if (processNumber == 3)
-	{
-
-	}
+		editor.updateLine();
 	else if (processNumber == 4)
 		editor.deleteLine();
 	else if (processNumber == 5)
