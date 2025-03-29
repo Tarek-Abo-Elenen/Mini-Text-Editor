@@ -7,7 +7,7 @@ public:
 	
     void addLine();
     void insertLine(int lineNumber, string& text);
-    string getLine(int lineNumber);
+    string getLine();
     void deleteLine(int lineNumber);
     void deleteRange(int startNumber, int endNumber);
     void updateLine(int lineNumber, string& text);

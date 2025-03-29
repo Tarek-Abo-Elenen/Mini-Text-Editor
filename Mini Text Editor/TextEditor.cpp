@@ -13,8 +13,12 @@ void TextEditor::addLine() {
 void TextEditor::insertLine(int lineNumber, string& text) {
 
 }
-string TextEditor::getLine(int lineNumber) {
-	return lines[lineNumber];
+string TextEditor::getLine() {
+	int lineNumber;
+	cout << "Enter The Number of Line:";
+	cin >> lineNumber;
+	cout << '\n';
+	return lines[lineNumber]+'\n';
 }
 void TextEditor::deleteLine(int lineNumber) {
 
@@ -30,10 +34,11 @@ void TextEditor::findAndReplaceAll(string& oldString, string& newString) {
 }
 void TextEditor::show() {
 	cout << endl;
-	for (int i = 1; i <= count; i++)
-	{
-		cout << i << '-' << lines[i] << endl;
-	}
+	if (lines.size() == 0)
+		cout << "There aren't text\n";
+	else
+		for (int i = 1; i <= count; i++)
+			cout << i << '-' << lines[i] << endl;
 	cout << endl;
 }
 void TextEditor::deleteRange(int startNumber,int endNumber) {

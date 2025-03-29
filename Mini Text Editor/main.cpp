@@ -28,32 +28,30 @@ void Processing(int processNumber) {
 		editor.addLine();
 	else if (processNumber == 2)
 	{
-	
+
 	}
-	else if(processNumber == 3)
+	else if (processNumber == 3)
 	{
-	
+
 	}
 	else if (processNumber == 4)
 	{
-		
+
 	}
 	else if (processNumber == 5)
 	{
-		
+
 	}
 	else if (processNumber == 6)
 	{
-		
+
 	}
 	else if (processNumber == 7)
 	{
-		
+
 	}
 	else if (processNumber == 8)
-	{
-	
-	}
+		cout << editor.getLine();
 	else if (processNumber == 9)
 	{
 		
