@@ -28,9 +28,7 @@ void Processing(int processNumber) {
 	if (processNumber == 1)
 		editor.addLine();
 	else if (processNumber == 2)
-	{
-
-	}
+		editor.insertLine();
 	else if (processNumber == 3)
 		editor.updateLine();
 	else if (processNumber == 4)

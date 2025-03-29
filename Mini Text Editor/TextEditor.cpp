@@ -10,8 +10,34 @@ void TextEditor::addLine() {
 	getline(cin, text);
 	lines.emplace(++count, text);
 }
-void TextEditor::insertLine(int lineNumber, string& text) {
-
+void TextEditor::insertLine() {
+	map<int, string>newmap;
+	int lineNumber;
+	string text;
+	cout << "Enter The Number of Line:";
+	cin >> lineNumber;
+	if (lineNumber > lines.size())
+	{
+		cout << "\nThere isn't this Line Number\n";
+		return;
+	}
+	cout << "Enter your text:";
+	cin.ignore();
+	getline(cin, text);
+	auto it = lines.begin();
+	for (int  i = 1; i <=count+1; i++)
+	{
+		if (i == lineNumber)
+			newmap[i] = text;
+		else
+		{
+			newmap[i] = it->second;
+			it++;
+		}
+	}
+	count++;
+	lines = newmap;
+	newmap.clear();
 }
 string TextEditor::getLine() {
 	int lineNumber;

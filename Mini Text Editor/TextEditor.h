@@ -6,7 +6,7 @@ class  TextEditor
 public:
 	
     void addLine();
-    void insertLine(int lineNumber, string& text);
+    void insertLine();
     string getLine();
     void deleteLine();
     void deleteRange(int startNumber, int endNumber);
