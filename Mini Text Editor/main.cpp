@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<regex>
 #include"TextEditor.h"
 using namespace std;
 void displayProgram() {
@@ -35,9 +36,7 @@ void Processing(int processNumber) {
 
 	}
 	else if (processNumber == 4)
-	{
-
-	}
+		editor.deleteLine();
 	else if (processNumber == 5)
 	{
 
@@ -62,13 +61,22 @@ void Processing(int processNumber) {
 		cout << "\n Pleacse Enter valid process Number";
 
 }
+bool isValidNumber(const string& input) {
+	regex numberPattern("^[0-9]+$");
+	return regex_match(input, numberPattern);
+}
 int main() {
-	int processNumber;
+	string processNumber;
 	displayProgram();
 	while (true)
 	{
 		cout << "\nEnter the Number of Process: ";
 		cin >> processNumber;
-		Processing(processNumber);
+		if (!isValidNumber(processNumber))
+		{
+			cout << "Pleace Enter only Numbers:";
+			continue;
+		}
+		Processing(stoi(processNumber));
 	}
 }

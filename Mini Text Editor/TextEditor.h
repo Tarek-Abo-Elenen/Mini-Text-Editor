@@ -8,7 +8,7 @@ public:
     void addLine();
     void insertLine(int lineNumber, string& text);
     string getLine();
-    void deleteLine(int lineNumber);
+    void deleteLine();
     void deleteRange(int startNumber, int endNumber);
     void updateLine(int lineNumber, string& text);
     map<int, string> findAll(string& search);

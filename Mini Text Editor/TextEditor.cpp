@@ -17,11 +17,27 @@ string TextEditor::getLine() {
 	int lineNumber;
 	cout << "Enter The Number of Line:";
 	cin >> lineNumber;
-	cout << '\n';
-	return lines[lineNumber]+'\n';
+	if (lineNumber > lines.size())
+		return "\nThere isn't this Line Number\n";
+	return '\n'+lines[lineNumber] + '\n';
 }
-void TextEditor::deleteLine(int lineNumber) {
-
+void TextEditor::deleteLine() {
+	int lineNumber;
+	cout << "Enter The Number of Line:";
+	cin >> lineNumber;
+	if (lineNumber > lines.size())
+	{
+		cout << "\nThere isn't this Line Number\n";
+		return;
+	}
+	count--;
+	lines.erase(lineNumber);
+	map<int, string>newmap;
+	int counter = 0;
+	for (auto i : lines)
+		newmap.emplace(++counter, i.second);
+	lines = newmap;
+	newmap.clear();
 }
 void TextEditor::updateLine(int lineNumber, string& text) {
 
@@ -35,10 +51,12 @@ void TextEditor::findAndReplaceAll(string& oldString, string& newString) {
 void TextEditor::show() {
 	cout << endl;
 	if (lines.size() == 0)
+	{
 		cout << "There aren't text\n";
-	else
-		for (int i = 1; i <= count; i++)
-			cout << i << '-' << lines[i] << endl;
+		return;
+	}
+	for (int i = 1; i <= count; i++)
+		cout << i << '-' << lines[i] << endl;
 	cout << endl;
 }
 void TextEditor::deleteRange(int startNumber,int endNumber) {
