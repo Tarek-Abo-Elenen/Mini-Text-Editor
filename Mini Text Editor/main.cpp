@@ -3,25 +3,20 @@
 #include"TextEditor.h"
 using namespace std;
 void displayProgram() {
-	cout << "\t";
-	for (int i = 0; i < 104; i++)
-		cout<<"*";
-	cout << "\n\n\t\t\t\t\t\t Hello in our Text Editor\n";
-	cout << "\t\t\t\t\t Enter the number of process do you want\n\n";
-	cout << "\t\t\t\t\t\t     1-Add line\n";
-	cout << "\t\t\t\t\t\t     2-Insert line\n";
-	cout << "\t\t\t\t\t\t     3-Update line\n";
-	cout << "\t\t\t\t\t\t     4-Delete line\n";
-	cout << "\t\t\t\t\t\t     5-Delete Range\n";
-	cout << "\t\t\t\t\t\t     6-Find All\n";
-	cout << "\t\t\t\t\t\t     7-Find and Replace All lines\n";
-	cout << "\t\t\t\t\t\t     8-Get Line\n";
-	cout << "\t\t\t\t\t\t     9-Undo\n";
-	cout << "\t\t\t\t\t\t     10-Show\n";
-	cout << "\n\t";
-	for (int i = 0; i < 104; i++)
-		cout << "*";
-	cout << '\n';
+	cout << "\n*************** The menu of program ***************";
+	cout << "\n\n\tHello in our Text Editor\n";
+	cout << "Enter the number of process do you want\n\n";
+	cout << "\t 1-Add line\n";
+	cout << "\t 2-Insert line\n";
+	cout << "\t 3-Update line\n";
+	cout << "\t 4-Delete line\n";
+	cout << "\t 5-Delete Range\n";
+	cout << "\t 6-Find All\n";
+	cout << "\t 7-Find and Replace All lines\n";
+	cout << "\t 8-Get Line\n";
+	cout << "\t 9-Undo\n";
+	cout << "\t 10-Show\n\n";
+	cout << "***************************************************\n";
 }
 void Processing(int processNumber) {
 	TextEditor editor;
@@ -49,8 +44,15 @@ void Processing(int processNumber) {
 		cout << "\n Pleacse Enter valid process Number";
 }
 int main() {
-	displayProgram();
 	TextEditor e;
+	char exit;
 	while (true)
+	{
+		displayProgram();
 		Processing(e.writeValidNumber("\nEnter the Number of Process: "));
+		cout << "\nDo you want to make another process y/n:";
+		cin >> exit;
+		if (exit == 'n')
+			break;
+	}
 }

@@ -9,6 +9,7 @@ void TextEditor::addLine() {
 	cin.ignore();
 	string text = readAndValidString("Enter your text:");
 	lines.emplace(++count, text);
+	show();
 }
 void TextEditor::insertLine() {
 	saveState();
@@ -32,11 +33,13 @@ void TextEditor::insertLine() {
 	count++;
 	lines = newmap;
 	newmap.clear();
+	show();
 }
 string TextEditor::getLine() {
 	saveState();
 	int lineNumber;
 	lineNumber = numberExists("Enter The Number of Line:");
+	cout << "\nThe content in this line";
 	return '\n'+lines[lineNumber] + '\n';
 }
 void TextEditor::deleteLine() {
@@ -51,6 +54,7 @@ void TextEditor::deleteLine() {
 		newmap.emplace(++counter, i.second);
 	lines = newmap;
 	newmap.clear();
+	show();
 }
 void TextEditor::updateLine() {
 	saveState();
@@ -60,26 +64,27 @@ void TextEditor::updateLine() {
 	cin.ignore();
 	text = readAndValidString("Enter the New text:");
 	lines[lineNumber] = text;
+	show();
 }
 void TextEditor::findAll() {
 	saveState();
 	map<int, string>result;
 	string search;
 	cin.ignore();
-	search = readAndValidString("Enter your text");
-	int counter = 0;
+	search = readAndValidString("Enter your text:");
 	for (auto it : lines)
 	{
 		
 		if (LowerCase(it.second).find(LowerCase(search)) != -1) {
-			result[++counter] = it.second;
+			result[it.first] = it.second;
 		}
 	}
 	if (result.empty())
 	{
-		cout << "\nthere isn't this word\n";
+		cout << "\nthere isn't this text\n";
 		return;
 	}
+	cout << "\nThe text exists in \n";
 	for (auto it : result) {
 		cout << it.first << "-" << it.second << '\n';
 	}
@@ -87,35 +92,39 @@ void TextEditor::findAll() {
 }
 void TextEditor::findAndReplaceAll() {
 	saveState();
-	string oldString,newString;
+	string oldString,newString,word;
 	int index;
 	bool flag = false;
 	cin.ignore();
 	oldString = readAndValidString("Enter the old text:");
 	newString = readAndValidString("Enter the new text:");
+	oldString = LowerCase(oldString);
 	auto item = lines.begin();
 	for (auto it : lines)
 	{
-		if (LowerCase(it.second).find(LowerCase(oldString)) != -1) {
+		word = LowerCase(it.second);
+		if (word.find(oldString) != -1) {
 			flag = true;
-			index = LowerCase(it.second).find(LowerCase(oldString));
-			item->second.replace(index, it.second.length(), newString);
+			index = word.find(oldString);
+			item->second.replace(index, oldString.length(), newString);
 		}
 		item++;
 	}
 	if (!flag)
 		cout << "\nthere isn't this word\n";
+	show();
 }
 void TextEditor::show() {
-	cout << endl;
+	cout << "\n\n*************** The Lines *************************\n\n";
 	if (lines.size() == 0)
 	{
 		cout << "There aren't text\n";
+		cout << "\n\n***************************************************\n\n";
 		return;
 	}
 	for (int i = 1; i <= count; i++)
 		cout << i << '-' << lines[i] << endl;
-	cout << endl;
+	cout << "\n\n***************************************************\n\n";
 }
 void TextEditor::deleteRange() {
 	saveState();
@@ -132,6 +141,7 @@ void TextEditor::deleteRange() {
 	lines = result;
 	count -= (endNumber - startNumber + 1);
 	result.clear();
+	show();
 }
 void TextEditor::undo() {
 	if (!history.empty()) {
@@ -153,8 +163,7 @@ string TextEditor::readAndValidString(string message) {
 	cout << message;
 	getline(cin, text);
 	while (text == "") {
-		cout << "\nWarning! The text cann't be empty\n";
-		cout << message;
+		cout << "\nWarning! The text cann't be empty\n" << message;
 		getline(cin, text);
 	}
 	return text;
@@ -168,8 +177,7 @@ int TextEditor::writeValidNumber(string message) {
 	cout << message;
 	cin >> input;
 	while (!regex_match(input, numberPattern)) {
-		cout << "Warning! Pleace Enter only Numbers\n";
-		cout << message;
+		cout << "Warning! Pleace Enter only posetive Numbers\n" << message;
 		cin >> input;
 	}
 	return stoi(input);
