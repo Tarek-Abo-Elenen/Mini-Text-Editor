@@ -25,5 +25,7 @@ public:
     void findAndReplaceAll();
     void show();
     void undo();
+    void openFile();
+    void closeFile();
 };
 

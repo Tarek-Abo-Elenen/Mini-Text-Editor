@@ -191,3 +191,19 @@ int TextEditor::numberExists(string message) {
 	}
 	return lineNumber;
 }
+void TextEditor::openFile() {
+    ifstream projectFile("TextEditor.txt");
+	string lineContent;
+	while (getline(projectFile, lineContent)) {
+		count++;
+		lines.emplace(count, lineContent);
+	}
+	projectFile.close();
+}
+void TextEditor::closeFile() {
+	ofstream projectFile("TextEditor.txt");
+	projectFile.clear();
+	for (auto it : lines)
+		projectFile << it.second << '\n';
+	projectFile.close();
+}

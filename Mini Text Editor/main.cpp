@@ -42,9 +42,11 @@ void Processing(int processNumber) {
 		editor.show();
 	else 
 		cout << "\n Pleacse Enter valid process Number";
+	editor.closeFile();
 }
 int main() {
 	TextEditor e;
+	e.openFile();
 	char exit;
 	while (true)
 	{
